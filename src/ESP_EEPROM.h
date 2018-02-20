@@ -1,9 +1,11 @@
 /*
-  EEPROM3.cpp - esp8266 EEPROM emulation
+  ESP_EEPROM.cpp - improved esp8266 EEPROM emulation
 
-  Copyright (c) 2014 Ivan Grokhotkov. All rights reserved.
-  This file is part of the esp8266 core for Arduino environment.
+  Copyright (c) 2018 James Watson. All rights reserved.
 
+  Based on API defined for ESP8266 EEPROM library, part of standard
+  esp8266 core for Arduino environment by Ivan Grokhotkov.
+ 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
   License as published by the Free Software Foundation; either
@@ -24,7 +26,6 @@
 
 #include <stddef.h>
 #include <stdint.h>
-#include <string.h>
 
 // If you are using a tiny amount then allocation map takes a lot of room and a long time to check
 // so minimum size is limited
@@ -42,9 +43,6 @@ class EEPROMClass {
     bool commitReset();
     int percentUsed();
     void end();
-
-    //    uint8_t * getDataPtr();
-    //    uint8_t const * getConstDataPtr() const;
 
     template<typename T>
     T &get(int const address, T &t) {

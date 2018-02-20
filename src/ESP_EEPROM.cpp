@@ -1,9 +1,11 @@
 /*
-  EEPROM3.cpp - esp8266 EEPROM emulation
+  ESP_EEPROM3.cpp - esp8266 EEPROM emulation
 
-  Copyright (c) 2014 Ivan Grokhotkov. All rights reserved.
-  This file is part of the esp8266 core for Arduino environment.
-
+ Copyright (c) 2018 James Watson. All rights reserved.
+ 
+ Based on API defined for ESP8266 EEPROM library, part of standard
+ esp8266 core for Arduino environment by Ivan Grokhotkov.
+ 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
   License as published by the Free Software Foundation; either
@@ -17,10 +19,10 @@
   You should have received a copy of the GNU Lesser General Public
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ 
+   Avoid the significant period with no interrupts required for flash erasure
+   - and avoid unnecessary re-flashing
 */
-/*
-   re-write to avoid the significant period with no interrupts
-   required for the flash erasure - and avoid unnecessary re-flashing
 
    // >>> Layout <<<
   // 2 bytes - size of a block
@@ -30,16 +32,11 @@
   //
   // 4096 bytes per sector
   // size - blocks - bytes in map
-  // 8    - 500 - 63
   // 16   - 250 - 32
-  // 10   - 400 - 50
   // 100  - 40  - 5
   // 1000 - 4   - 1
   //
-  // begin(size)
-  //
 
-*/
 
 #include "Arduino.h"
 #include "ESP_EEPROM.h"

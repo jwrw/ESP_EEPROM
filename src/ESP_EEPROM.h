@@ -28,7 +28,6 @@
 
 // If you are using a tiny amount then allocation map takes a lot of room and a long time to check
 // so minimum size is limited
-
 const size_t EEPROM_MIN_SIZE = 16;
 
 class EEPROMClass {
@@ -37,7 +36,6 @@ class EEPROMClass {
     EEPROMClass(void);
 
     void begin(size_t size);
-    void begin(size_t size, boolean reset);
     uint8_t read(int const address);
     void write(int const address, uint8_t const val);
     bool commit();

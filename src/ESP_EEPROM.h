@@ -26,10 +26,17 @@
 
 #include <stddef.h>
 #include <stdint.h>
+<<<<<<< HEAD
 //#include <string.h>
 
 // If you are using a tiny amount then allocation map takes a lot of room
 // and a long time to check - so minimum size is limited
+=======
+#include <string.h>
+
+// If you are using a tiny amount then allocation map takes a lot of room and a long time to check
+// so minimum size is limited
+>>>>>>> 53a00de5b6386b1b5a98684550a77bab06d3a9c0
 const size_t EEPROM_MIN_SIZE = 16;
 
 class EEPROMClass {
@@ -38,7 +45,6 @@ class EEPROMClass {
     EEPROMClass(void);
 
     void begin(size_t size);
-    void begin(size_t size, boolean reset);
     uint8_t read(int const address);
     void write(int const address, uint8_t const val);
     bool commit();

@@ -80,8 +80,9 @@ EEPROMClass::EEPROMClass(void)  :
 
 //------------------------------------------------------------------------------
 void EEPROMClass::begin(size_t size) {
+  _dirty = true;
   if (size <= 0 || size > (SPI_FLASH_SEC_SIZE - 8)) {
-        // max size is smaller by 4 bytes for size and 4 byte bitmap - to keep 4 byte aligned
+    // max size is smaller by 4 bytes for size and 4 byte bitmap - to keep 4 byte aligned
     return;
   } else if (size < EEPROM_MIN_SIZE) {
     size = EEPROM_MIN_SIZE;
@@ -99,7 +100,7 @@ void EEPROMClass::begin(size_t size) {
     _size = size;
     _offset = 0;    // offset of zero => flash data is garbage
 
-    // ensure we drop any old allocation if wrong
+    // ensure we drop any old allocation as it is wrong
     if (_bitmap) {
       delete[] _bitmap;
       _bitmap = new uint8_t[_bitmapSize];
@@ -108,31 +109,29 @@ void EEPROMClass::begin(size_t size) {
       delete[] _data;
       _data = new uint8_t[_size];
     }
-    return;
   } else {
-    // read the bitmap from flash
+    // Size is correct so get bitmap/data from flash
+    // First read the bitmap from flash
     noInterrupts();
     spi_flash_read(_sector * SPI_FLASH_SEC_SIZE + 4, reinterpret_cast<uint32_t*>(_bitmap), _bitmapSize);
     interrupts();
 
-    // flash should contain a good version - find it using the bitmap
+    // flash should contain a good version of the data - find it using the bitmap
     _offset = offsetFromBitmap();
 
     if (_offset == 0 || _offset + _size > SPI_FLASH_SEC_SIZE) {
       // something is screwed up
       // flag that _data[] is bad / uninitialised
       _offset = 0;
-    } else {
-
+    } else {   
       noInterrupts();
       spi_flash_read(_sector * SPI_FLASH_SEC_SIZE + _offset, reinterpret_cast<uint32_t*>(_data), _size);
       interrupts();
+      
+      // all good 
+      _dirty = false;
     }
   }
-  }
-
-  // all good 
-  _dirty = false;
 }
 
 //------------------------------------------------------------------------------
@@ -214,40 +213,39 @@ bool EEPROMClass::commit() {
   SpiFlashOpResult flashOk = SPI_FLASH_RESULT_OK;
   uint32_t oldOffset = _offset;   // if write fails, _offset won't be updated
 
-  noInterrupts();
-
   // If not enough room for new version, erase and start anew
-  if (_offset == 0) {
-    // first time writing - but flash has already been erased and initialised in begin()
-    _offset = 4 + _bitmapSize;
-  } else if (_offset + _size + _size > SPI_FLASH_SEC_SIZE) {
+  if (_offset == 0 || _offset + _size + _size > SPI_FLASH_SEC_SIZE) {
 
+    noInterrupts();
     flashOk = spi_flash_erase_sector(_sector);
+    interrupts();
     if (flashOk != SPI_FLASH_RESULT_OK) {
-      interrupts();
       return false;
     }
 
     // write size
+    noInterrupts();
     flashOk = spi_flash_write(_sector * SPI_FLASH_SEC_SIZE, reinterpret_cast<uint32_t*>(&_size), 4);
+    interrupts();
     if (flashOk != SPI_FLASH_RESULT_OK) {
-      interrupts();
       return false;
     }
-    _offset = 4 + _bitmapSize;
 
     // finally clear down the bitmap - for speed we assume the bitmap bit 0 was good (no re-read)
     uint8_t init = (_bitmap[0] & 1) ? 0xff : 0;
     for (int i = 0; i < _bitmapSize; i++ ) _bitmap[i] = init;
-
+    
+    // all reset ok - point to where the data needs to go
+    _offset = 4 + _bitmapSize;
   } else {
     _offset += _size;
   }
 
+  noInterrupts();
   flashOk = spi_flash_write(_sector * SPI_FLASH_SEC_SIZE + _offset, reinterpret_cast<uint32_t*>(_data), _size);
-
+  interrupts();
+  
   if (flashOk != SPI_FLASH_RESULT_OK) {
-    interrupts();
     _offset = oldOffset;
     return false;
   }
@@ -256,9 +254,10 @@ bool EEPROMClass::commit() {
   int bitmapByteUpdated = flagUsedOffset();
 
   bitmapByteUpdated &= ~3;    // align to 4 byte for write
+  noInterrupts();
   flashOk = spi_flash_write(_sector * SPI_FLASH_SEC_SIZE + bitmapByteUpdated + 4, reinterpret_cast<uint32_t*>(&_bitmap[bitmapByteUpdated]), 4);
+  interrupts();
   if (flashOk != SPI_FLASH_RESULT_OK) {
-    interrupts();
     return false;
   }
 

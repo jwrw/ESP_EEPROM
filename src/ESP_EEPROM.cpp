@@ -199,7 +199,6 @@ bool EEPROMClass::commitReset() {
 bool EEPROMClass::commit() {
     // everything has to be in place to even try a commit
     if (!_size || !_dirty || !_data || !_bitmap || _bitmapSize == 0) {
-        Serial.println("Not ready for commit");
         return false;
     }
     
@@ -213,7 +212,6 @@ bool EEPROMClass::commit() {
         flashOk = spi_flash_erase_sector(_sector);
         interrupts();
         if (flashOk != SPI_FLASH_RESULT_OK) {
-            Serial.println("Erase failed");
             return false;
         }
         
@@ -222,7 +220,6 @@ bool EEPROMClass::commit() {
         flashOk = spi_flash_write(_sector * SPI_FLASH_SEC_SIZE, reinterpret_cast<uint32_t*>(&_size), 4);
         interrupts();
         if (flashOk != SPI_FLASH_RESULT_OK) {
-            Serial.println("Initial write of size failed");
             return false;
         }
         
@@ -246,7 +243,6 @@ bool EEPROMClass::commit() {
     
     if (flashOk != SPI_FLASH_RESULT_OK) {
         _offset = oldOffset;
-        Serial.println("Write of _data failed");
         return false;
     }
     
@@ -258,7 +254,6 @@ bool EEPROMClass::commit() {
     flashOk = spi_flash_write(_sector * SPI_FLASH_SEC_SIZE + bitmapByteUpdated + 4, reinterpret_cast<uint32_t*>(&_bitmap[bitmapByteUpdated]), 4);
     interrupts();
     if (flashOk != SPI_FLASH_RESULT_OK) {
-        Serial.println("Write of _bitmap failed");
         return false;
     }
     

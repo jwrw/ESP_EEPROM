@@ -32,7 +32,7 @@ void setup() {
   // This odd speed will show ESP8266 boot diagnostics too
   Serial.begin(74880);
   Serial.println();
-  
+
   // Set up the initial (default) values for what is to be stored in EEPROM
   eepromVar1.anInteger = 99;
   eepromVar1.aFloating = 99.99;
@@ -45,22 +45,8 @@ void setup() {
   // The library needs to know what size you need for your EEPROM variables
   // Using a structure makes this easy.
 
-  // The begin() call will find the data previously saved in EEPROM if the same size
-  // as was previously committed. If the size is different then the EEEPROM data is cleared. 
-  // Note that this is not made permanent until you call commit();
+  // The begin() call is required to initialise the EEPROM library
   EEPROM.begin(sizeof(MyEEPROMStruct));
-
-  // Check if the EEPROM contains valid data from another run
-  // If so, overwrite the 'default' values set up in our struct
-  if(EEPROM.percentUsed()!=0) {
-    EEPROM.get(0, eepromVar1);
-    eepromVar1.anInteger++;     // make a change to our copy of the EEPROM data
-    Serial.println("EEPROM has data from a previous run.");
-    Serial.print(EEPROM.percentUsed());
-    Serial.println("% of ESP flash space currently used");
-  } else {
-    Serial.println("EEPROM size changed - EEPROM data zeroed - commit() to make permanent");    
-  }
 
   //
   // (some code that might change the EEPROM data)
@@ -69,16 +55,22 @@ void setup() {
   // set the EEPROM data ready for writing
   EEPROM.put(0, eepromVar1);
 
+  // write the data to EEPROM - ignoring anything that might be there already (re-flash is guaranteed)
+  boolean ok1 = EEPROM.commitReset();
+  Serial.println((ok1) ? "Commit (Reset) OK" : "Commit failed");
+
+  //
+  // (some code that might change the EEPROM data some more)
+  //
+  eepromVar1.anInteger++;   // Change some data
+
+  // set the EEPROM data ready for writing
+  EEPROM.put(0, eepromVar1);
+
   // write the data to EEPROM
-  boolean ok = EEPROM.commit();
-  Serial.println((ok) ? "Commit OK" : "Commit failed");
+  boolean ok2 = EEPROM.commit();
+  Serial.println((ok2) ? "Commit OK" : "Commit failed");
 
-  // Get EEPROM data into our local copy
-  // For this example, a different struct variable is used 
-  EEPROM.get(0, eepromVar2);
-
-  Serial.print("EEPROM data read, anInteger=");
-  Serial.println(eepromVar2.anInteger);
 }
 
 

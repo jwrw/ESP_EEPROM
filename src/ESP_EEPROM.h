@@ -41,6 +41,7 @@ public:
     void write(int const address, uint8_t const val);
     bool commit();
     bool commitReset();
+    bool wipe();
     int percentUsed();
     void end();
     

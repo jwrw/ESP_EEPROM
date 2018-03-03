@@ -1,9 +1,9 @@
 /*
- ESP_EEPROM3.cpp - esp8266 EEPROM emulation
+ ESP_EEPROM.cpp - esp8266 EEPROM emulation
  
  Copyright (c) 2018 James Watson. All rights reserved.
  
- Based on API defined for ESP8266 EEPROM library, part of standard
+ Based on ESP8266 EEPROM library, part of standard
  esp8266 core for Arduino environment by Ivan Grokhotkov.
  
  This library is free software; you can redistribute it and/or
@@ -263,9 +263,12 @@ bool EEPROMClass::commit() {
     return true;
 }
 
-/------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+// Force an immedate erase of the flash sector - but nothing is written
+// Will need a commit() to write structure (size and bitmap etc.)
+// but does re-intitialise internal storage
 bool EEPROMClass::wipe() {
-    If(_size==0 || _bitmapSize==0) return false;      // must have called begin()
+    if(_size==0 || _bitmapSize==0) return false;      // must have called begin()
     
     // drop any old allocation and re-allocate buffers
     if (_bitmap) {
@@ -275,7 +278,7 @@ bool EEPROMClass::wipe() {
     if (_data) {
         delete[] _data;
     }
-    _data = new uint8_t[size];
+    _data = new uint8_t[_size];
     
     noInterrupts();
     boolean flashOk = spi_flash_erase_sector(_sector);
@@ -342,7 +345,7 @@ uint16_t EEPROMClass::computeBitmapSize(size_t size) {
 
     // With 1 bit in bitmap and 8 bits per byte
     // This is the max number of copies possible
-    uint32_t nCopies = ((SPI_FLASH_SEC_SIZEx - 4L) * 8L - 1L) / (size * 8L + 1L);
+    uint32_t nCopies = ((SPI_FLASH_SEC_SIZE - 4L) * 8L - 1L) / (size * 8L + 1L);
 
     // applying alignment constraints - this is the bitmap size needed
     uint32_t bitmapSize = (((nCopies + 1L) + 31L) / 8L)  & ~3;

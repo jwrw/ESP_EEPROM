@@ -337,22 +337,17 @@ int EEPROMClass::flagUsedOffset() {
 }
 
 //------------------------------------------------------------------------------
-// Computing the exact correct size in bytes is a bit messy
-// we just go for something safe & simple but not v elegant
+// Computing size of bitmap needed for the number of copies that can be held
 uint16_t EEPROMClass::computeBitmapSize(size_t size) {
-    // TODO This may be the correct formula??? - will test properly some time...
-    //  ( 3 + (SPI_FLASH_SEC_SIZE + 9 * size) / (8 * size)) & ~3 ;  // TODO
-    uint16_t bitmapSize = 0;
-    
-    int nVersions;
-    do {
-        // bitmap size must be 4 byte aligned
-        bitmapSize += 4;
-        nVersions = (SPI_FLASH_SEC_SIZE - 4 - bitmapSize) / size;
-    } while ( (nVersions + 1) > (bitmapSize * 8) );
-    // bitmap needs one bit per version plus 1 for the unchanged 'reference' bit at the start
-    
-    return bitmapSize;
+
+    // With 1 bit in bitmap and 8 bits per byte
+    // This is the max number of copies possible
+    uint32_t nCopies = ((SPI_FLASH_SEC_SIZEx - 4L) * 8L - 1L) / (size * 8L + 1L);
+
+    // applying alignment constraints - this is the bitmap size needed
+    uint32_t bitmapSize = (((nCopies + 1L) + 31L) / 8L)  & ~3;
+
+    return bitmapSize & 0x7fff;
 }
 
 //------------------------------------------------------------------------------

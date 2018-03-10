@@ -279,15 +279,15 @@ bool EEPROMClass::wipe() {
         delete[] _data;
     }
     _data = new uint8_t[_size];
-    
+
     noInterrupts();
-    boolean flashOk = spi_flash_erase_sector(_sector);
+    SpiFlashOpResult flashOk = spi_flash_erase_sector(_sector);
     interrupts();
 
     // flash is clear - need a commit() to write structure (size and bitmap etc.)
     _dirty = true;
     _offset = 0;
-    return flashOk;
+    return (flashOk==SPI_FLASH_RESULT_OK);
 }
 
 //------------------------------------------------------------------------------

@@ -47,6 +47,11 @@ extern "C" {
 extern "C" uint32_t _SPIFFS_end;
 
 //------------------------------------------------------------------------------
+/**
+ * Create an instance of this class!!
+ *
+ * @param sector The flash sector to use to hold the EEPROM data
+ */
 EEPROMClass::EEPROMClass(uint32_t sector):
 _sector(sector),
 _data(0),

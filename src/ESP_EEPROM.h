@@ -53,6 +53,13 @@ public:
         return t;
     }
     
+    /**
+     * Write data to the EEPROM buffer.
+     *
+     * @param address Relative address to which to write the data whithin the EEPROM buffer.
+     * @param t The variable to write to the buffer
+     * @return The variable written to the buffer
+     */
     template<typename T>
     const T &put(int const address, const T &t) {
         if (_data && (address >= 0) && (address + sizeof(T) <= _size)) {

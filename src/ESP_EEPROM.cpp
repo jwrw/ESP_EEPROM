@@ -133,8 +133,23 @@ void EEPROMClass::begin(size_t size) {
 }
 
 //------------------------------------------------------------------------------
+/**
+* Returns the percentage of EEPROM flash memory area that has been used by copies of
+* our EEPROM data.
+*
+* Each commit() will write a new copy to the next free area of the segment of flash
+* memory given over to EEPROM.  This routine allows you to keep track of how much has been used 
+* to anticipate when the library will next need to do a flash erase of the EEPROM sector.
+*
+* Since version 2 the return value of -1 is used to indicate that no erase/write has
+* been done to the flash with the current sized EEPROM data. It is important to 
+* distinguish this from the case where 1 or 2 copies of a small sized EEPROM data has 
+* been written but still might amount to 0% used (when rounded to an integer)
+*
+* @return The percentage used (0-100) or -1 if the flash does not hold any copies of the data.
+*/
 int EEPROMClass::percentUsed() {
-    if(_offset == 0 || _size==0) return 0;
+    if(_offset == 0 || _size==0) return -1;
     else {
         int nCopies = (SPI_FLASH_SEC_SIZE - 4 - _bitmapSize) / _size;
         int copyNo = 1 + (_offset - 4 - _bitmapSize) / _size;

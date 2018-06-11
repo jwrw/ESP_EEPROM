@@ -48,7 +48,7 @@ extern "C" uint32_t _SPIFFS_end;
 
 //------------------------------------------------------------------------------
 /**
- * Create an instance of this class!!
+ * Create an instance of the EEPROM class at using a specified sector of flash memory.
  *
  * @param sector The flash sector to use to hold the EEPROM data
  */
@@ -64,6 +64,9 @@ _dirty(false)
 }
 
 //------------------------------------------------------------------------------
+/**
+ * Create an instance of the EEPROM class based on the default EEPROM flash sector
+ */
 EEPROMClass::EEPROMClass(void)  :
 _sector((((uint32_t) & _SPIFFS_end - 0x40200000) / SPI_FLASH_SEC_SIZE)),
 _data(0),
@@ -76,6 +79,21 @@ _dirty(false)
 }
 
 //------------------------------------------------------------------------------
+/**
+ * Initialise the EEPROM system, reading from flash if there appears to be suitable
+ * data already there.
+ *
+ * To correctly initialise the library, you need to specify the size of the EEPROM area your
+ * program will need.  The idea of this library is that the size of EEPROM you need is much smaller than
+ * the flash sector size.  This means that the sector can hold several copies of the EEPROM data.
+ *
+ * This ...
+ *
+ * If your EEPROM size is bigger than half the flash sector size then you might as well use
+ * the standard library, as ESP_EEPROM will not really give you any benefit.
+ *
+ * @param size
+ */
 void EEPROMClass::begin(size_t size) {
     _dirty = true;
     if (size <= 0 || size > (SPI_FLASH_SEC_SIZE - 8)) {

@@ -19,17 +19,68 @@
  You should have received a copy of the GNU Lesser General Public
  License along with this library; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
- 
- Avoid the significant period with no interrupts required for flash erasure
- - and avoid unnecessary re-flashing
- 
- >>> Layout <<<
- 4 bytes - size of a block
- bitmap - bit 0 never written - shows state of flash after erase
- subsequent bits are set to the opposite for each block containing data
- the highest block is the latest version
- Data versions follow consecutively - size rounded up to 4 byte boundaries
- and a minimum size
+*/
+
+/** @class EEPROMClass
+ *
+ * The ESP does not have a genuine EEPROM memory so this needs to be emulated
+ * using a segment of flash memory; this library improves upon the the standard
+ * library by avoiding excessive re-flashing of the flash memory.
+ *
+ * The library maintains a copy of your 'EEPROM' data in normal RAM which you read() and write() to.
+ * To ensure this buffered data gets saved when you power-off or reset the system you must
+ * call commit() to write the buffer to flash memory that will survive the reset.
+ * When you call begin() the library will check the flash memory and read the data there
+ * into the buffer so it is available to be read() by your program.
+ *
+ * Including this library will create a variable call 'EEPROM' in your program which
+ * you use to access the EEPROM functions, such as EEPROM.begin(), EEPRON.read(), etc.
+ *
+ * ## WHy ESP_EEPROM
+ * It is not possible to rewrite flash memory without first erasing it back to a known state.
+ * With the normal library, each commit() of the data to flash requires an erase of the flash
+ * sector. With this revised library the sector in flash memory is used to hold multiple copies
+ * of the EEPROM data.  Each time you commit() data, it is written to a new area of flash until the
+ * sector is full. Only then does the library erase the sector to allow the next copy to be
+ * written.
+ *
+ * The main drawback of erasing the flash is that it is quite slow (several 10s of ms) and during
+ * all operations on flash memory the interrupts have to be halted.
+ * Stopping interrupts will disrupt an PWM (analogWrite) outputs which can produce a noticeable
+ * disturbance in any lights attached to these.
+ * Flash memory can also only accommodate a limited number of re-flashes before it fails.
+ * This library helps extend the life of the flash memory by reducing the number of times it
+ * needs to be erased.
+ *
+ * ## Layout
+ * This implementation detail is hidden from you by the library but it may be helpful to
+ * understand what is happening 'under the hood'.
+ *
+ * The structure held in the flash segment varies in size depending on the size
+ * requested in the call to begin().
+ *
+ * - 4 bytes - size of a block
+ * - bitmap - bit 0 never written - shows state of flash after erase
+ *   subsequent bits are set to the opposite for each block containing data
+ *   the highest block is the latest version
+ * - Data versions follow consecutively - size rounded up to 4 byte boundaries
+ *   and a minimum size
+ *
+ * During the begin() call, the library checks if the requested size matches the size of blocks
+ * held in the flash.  If so, the bitmap is used to find the most recently written block and this
+ * is copied to the buffer held by the library.
+ * When data is written to flash using commit(), then the library updates the bitmap and writes the
+ * data to the next available area in the flash segment. If there isn't room for a new copy then the
+ * sector is erased, the size and new bitmap are written, followed by the data.
+ *
+ * ## When to use
+ * Most of the time we need a small amount to EEPROM memory to retain settings
+ * between re-boots of the system.
+ * If your application uses a lot of EEPROM, e.g. more than half a flash segment,
+ * then you will get no benefit from using this library.
+ * Normally the sector size is 4096 bytes so don't bther with this library if your EEPROM
+ * requirement is over ~2000 bytes.
+ *
  */
 
 
@@ -48,7 +99,8 @@ extern "C" uint32_t _SPIFFS_end;
 
 //------------------------------------------------------------------------------
 /**
- * Create an instance of the EEPROM class at using a specified sector of flash memory.
+ * Create an instance of the EEPROM class at using a specified sector of flash memory;
+ * this constructor is not normally used, as including the library instantiates the required EEPROM variable.
  *
  * @param sector The flash sector to use to hold the EEPROM data
  */
@@ -65,7 +117,8 @@ _dirty(false)
 
 //------------------------------------------------------------------------------
 /**
- * Create an instance of the EEPROM class based on the default EEPROM flash sector
+ * Create an instance of the EEPROM class based on the default EEPROM flash sector;
+ * this constructor is not normally used, as including the library instantiates the required EEPROM variable.
  */
 EEPROMClass::EEPROMClass(void)  :
 _sector((((uint32_t) & _SPIFFS_end - 0x40200000) / SPI_FLASH_SEC_SIZE)),
@@ -84,13 +137,17 @@ _dirty(false)
  * data already there.
  *
  * To correctly initialise the library, you need to specify the size of the EEPROM area your
- * program will need.  The idea of this library is that the size of EEPROM you need is much smaller than
- * the flash sector size.  This means that the sector can hold several copies of the EEPROM data.
+ * program will need.
  *
- * This ...
+ * This function checks the flash sector to verify if it contains correct size data.
+ * If the size is good and the bitmap is
+ * valid then the data buffer in the library is initialised from the flash memory.
+ * This is a simplistic check and you may wish to include some check value or version number
+ * within your EEPROM data to provide additional confidence that the data is really good.
  *
- * If your EEPROM size is bigger than half the flash sector size then you might as well use
- * the standard library, as ESP_EEPROM will not really give you any benefit.
+ * If the size is wrong or the bitmap appear broken then the data buffer is zeroed.
+ * Nothing is written to the flash until you call the commit() function, which will erase
+ * the sector and write the new data.
  *
  * @param size
  */
@@ -176,6 +233,9 @@ int EEPROMClass::percentUsed() {
 }
 
 //------------------------------------------------------------------------------
+/**
+ * Free up storage used by the library.
+ */
 void EEPROMClass::end() {
     if (!_size)
         return;
@@ -234,6 +294,13 @@ bool EEPROMClass::commitReset() {
 }
 
 //------------------------------------------------------------------------------
+/**
+ * Write the EEPROM data to the flash memory
+ *
+ * The flash segment for EEPROM data is erased if necessary before performing the write.
+ *
+ * @return True if successful; false if no write was successfully performed
+ */
 bool EEPROMClass::commit() {
     // everything has to be in place to even try a commit
     if (!_size || !_dirty || !_data || !_bitmap || _bitmapSize == 0) {
@@ -302,9 +369,14 @@ bool EEPROMClass::commit() {
 }
 
 //------------------------------------------------------------------------------
-// Force an immedate erase of the flash sector - but nothing is written
-// Will need a commit() to write structure (size and bitmap etc.)
-// but does re-intitialise internal storage
+/**
+ * Force an immedate erase of the flash sector - but nothing is written
+ *
+ * The internal library variables & data are initialised (zeroed) but the commit() function must be called
+ * to write structure (size and bitmap etc.) and any new data to the flash.
+ *
+ * @return True is success; false if the erase operation failed.
+ */
 bool EEPROMClass::wipe() {
     if(_size==0 || _bitmapSize==0) return false;      // must have called begin()
     

@@ -34,7 +34,7 @@
  *
  * ## Calling the library
  * Including this library will create a variable call 'EEPROM' in your program which
- * you use to access the EEPROM functions, such as EEPROM.begin(), EEPRON.read(), etc.
+ * you use to access the EEPROM functions, such as EEPROM.begin(), EEPROM.read(), etc.
  *
  * ## Why ESP_EEPROM
  * It is not possible to rewrite flash memory without first erasing it back to a known state.
@@ -332,7 +332,7 @@ bool EEPROMClass::commitReset() {
  * The flash segment for EEPROM data is erased if necessary before performing the write.
  * The library maintains a record of whether the buffer has been changed and the write
  * to flash is only performed if the flash does not yet have a copy of the data or
- * if the data in the buffer has change from what is stored in the flash memory.
+ * if the data in the buffer has changed from what is stored in the flash memory.
  *
  * @return True if successful; false if the write was unsuccessful.
  */

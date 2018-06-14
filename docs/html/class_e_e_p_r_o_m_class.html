@@ -60,20 +60,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab27ca4fac7c886d61b6294525b17ecf9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_e_p_r_o_m_class.html#ab27ca4fac7c886d61b6294525b17ecf9">begin</a> (size_t size)</td></tr>
 <tr class="memdesc:ab27ca4fac7c886d61b6294525b17ecf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise the EEPROM system, reading from flash if there appears to be suitable data already there.  <a href="#ab27ca4fac7c886d61b6294525b17ecf9">More...</a><br /></td></tr>
 <tr class="separator:ab27ca4fac7c886d61b6294525b17ecf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e6fae68c926a984dfafab4c3f5a825d"><td class="memItemLeft" align="right" valign="top"><a id="a2e6fae68c926a984dfafab4c3f5a825d"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (int const address)</td></tr>
+<tr class="memitem:a2e6fae68c926a984dfafab4c3f5a825d"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_e_p_r_o_m_class.html#a2e6fae68c926a984dfafab4c3f5a825d">read</a> (int const address)</td></tr>
+<tr class="memdesc:a2e6fae68c926a984dfafab4c3f5a825d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a byte of data from an offset in the buffered EEPROM data.  <a href="#a2e6fae68c926a984dfafab4c3f5a825d">More...</a><br /></td></tr>
 <tr class="separator:a2e6fae68c926a984dfafab4c3f5a825d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a4c9ed90008d133e43d30b41941214e"><td class="memItemLeft" align="right" valign="top"><a id="a5a4c9ed90008d133e43d30b41941214e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (int const address, uint8_t const val)</td></tr>
+<tr class="memitem:a5a4c9ed90008d133e43d30b41941214e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_e_p_r_o_m_class.html#a5a4c9ed90008d133e43d30b41941214e">write</a> (int const address, uint8_t const val)</td></tr>
+<tr class="memdesc:a5a4c9ed90008d133e43d30b41941214e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a byte of data to an address within the the library's EEPROM data buffer.  <a href="#a5a4c9ed90008d133e43d30b41941214e">More...</a><br /></td></tr>
 <tr class="separator:a5a4c9ed90008d133e43d30b41941214e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a871f11ba6f5a43c1e9ecde1ce99dbb6b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_e_p_r_o_m_class.html#a871f11ba6f5a43c1e9ecde1ce99dbb6b">commit</a> ()</td></tr>
 <tr class="memdesc:a871f11ba6f5a43c1e9ecde1ce99dbb6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the EEPROM data to the flash memory.  <a href="#a871f11ba6f5a43c1e9ecde1ce99dbb6b">More...</a><br /></td></tr>
 <tr class="separator:a871f11ba6f5a43c1e9ecde1ce99dbb6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4af12c26be29b81b729090d78c8247a4"><td class="memItemLeft" align="right" valign="top"><a id="a4af12c26be29b81b729090d78c8247a4"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>commitReset</b> ()</td></tr>
+<tr class="memitem:a4af12c26be29b81b729090d78c8247a4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_e_p_r_o_m_class.html#a4af12c26be29b81b729090d78c8247a4">commitReset</a> ()</td></tr>
+<tr class="memdesc:a4af12c26be29b81b729090d78c8247a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform an erase of the flash sector before committing the data.  <a href="#a4af12c26be29b81b729090d78c8247a4">More...</a><br /></td></tr>
 <tr class="separator:a4af12c26be29b81b729090d78c8247a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae991983e499457e5cd1d988b35a34f71"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_e_p_r_o_m_class.html#ae991983e499457e5cd1d988b35a34f71">wipe</a> ()</td></tr>
-<tr class="memdesc:ae991983e499457e5cd1d988b35a34f71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force an immedate erase of the flash sector - but nothing is written.  <a href="#ae991983e499457e5cd1d988b35a34f71">More...</a><br /></td></tr>
+<tr class="memdesc:ae991983e499457e5cd1d988b35a34f71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force an immediate erase of the flash sector - but nothing is written.  <a href="#ae991983e499457e5cd1d988b35a34f71">More...</a><br /></td></tr>
 <tr class="separator:ae991983e499457e5cd1d988b35a34f71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad68a1684c65c2732d9a186d4ff964c11"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_e_p_r_o_m_class.html#ad68a1684c65c2732d9a186d4ff964c11">percentUsed</a> ()</td></tr>
 <tr class="memdesc:ad68a1684c65c2732d9a186d4ff964c11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the percentage of EEPROM flash memory area that has been used by copies of our EEPROM data.  <a href="#ad68a1684c65c2732d9a186d4ff964c11">More...</a><br /></td></tr>
@@ -82,14 +82,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>commitReset</b> ()</t
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_e_p_r_o_m_class.html#a3a5ffd5cd24f9b3efa8b85df4c8791bd">end</a> ()</td></tr>
 <tr class="memdesc:a3a5ffd5cd24f9b3efa8b85df4c8791bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free up storage used by the library. <br /></td></tr>
 <tr class="separator:a3a5ffd5cd24f9b3efa8b85df4c8791bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea3d52508c0dbd4505cc9d701d33aad7"><td class="memTemplParams" colspan="2"><a id="aea3d52508c0dbd4505cc9d701d33aad7"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:aea3d52508c0dbd4505cc9d701d33aad7"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>get</b> (int const address, T &amp;t)</td></tr>
-<tr class="separator:aea3d52508c0dbd4505cc9d701d33aad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a6c2a284d7a302332eadc1693aad1d1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a3a6c2a284d7a302332eadc1693aad1d1"><td class="memTemplItemLeft" align="right" valign="top">const T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_e_e_p_r_o_m_class.html#a3a6c2a284d7a302332eadc1693aad1d1">put</a> (int const address, const T &amp;t)</td></tr>
-<tr class="memdesc:a3a6c2a284d7a302332eadc1693aad1d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write data to the EEPROM buffer.  <a href="#a3a6c2a284d7a302332eadc1693aad1d1">More...</a><br /></td></tr>
-<tr class="separator:a3a6c2a284d7a302332eadc1693aad1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b1b67982183fa713c6fe2b68f5cf314"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a1b1b67982183fa713c6fe2b68f5cf314"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_e_e_p_r_o_m_class.html#a1b1b67982183fa713c6fe2b68f5cf314">get</a> (int const address, T &amp;v)</td></tr>
+<tr class="memdesc:a1b1b67982183fa713c6fe2b68f5cf314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain EEPROM data for a variable stored at the address.  <a href="#a1b1b67982183fa713c6fe2b68f5cf314">More...</a><br /></td></tr>
+<tr class="separator:a1b1b67982183fa713c6fe2b68f5cf314"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9bf1cd34ee9a67ffec7c8efe80de253"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aa9bf1cd34ee9a67ffec7c8efe80de253"><td class="memTemplItemLeft" align="right" valign="top">const T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_e_e_p_r_o_m_class.html#aa9bf1cd34ee9a67ffec7c8efe80de253">put</a> (int const address, const T &amp;v)</td></tr>
+<tr class="memdesc:aa9bf1cd34ee9a67ffec7c8efe80de253"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write data to the EEPROM buffer.  <a href="#aa9bf1cd34ee9a67ffec7c8efe80de253">More...</a><br /></td></tr>
+<tr class="separator:aa9bf1cd34ee9a67ffec7c8efe80de253"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9102b7b98206022c027bc999902a65eb"><td class="memItemLeft" align="right" valign="top"><a id="a9102b7b98206022c027bc999902a65eb"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>length</b> ()</td></tr>
 <tr class="separator:a9102b7b98206022c027bc999902a65eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -99,14 +99,14 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a5116cef3bed42ec915d2c62d16cc806b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_e_p_r_o_m_class.html#a5116cef3bed42ec915d2c62d16cc806b">EEPROMClass</a> (uint32_t sector)</td></tr>
 <tr class="memdesc:a5116cef3bed42ec915d2c62d16cc806b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an instance of the EEPROM class at using a specified sector of flash memory; this constructor is not normally used, as including the library instantiates the required EEPROM variable.  <a href="#a5116cef3bed42ec915d2c62d16cc806b">More...</a><br /></td></tr>
 <tr class="separator:a5116cef3bed42ec915d2c62d16cc806b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a864aaa190aa805c688699b5494d99e04"><td class="memItemLeft" align="right" valign="top"><a id="a864aaa190aa805c688699b5494d99e04"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>offsetFromBitmap</b> ()</td></tr>
+<tr class="memitem:a864aaa190aa805c688699b5494d99e04"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_e_p_r_o_m_class.html#a864aaa190aa805c688699b5494d99e04">offsetFromBitmap</a> ()</td></tr>
+<tr class="memdesc:a864aaa190aa805c688699b5494d99e04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the offset of the current version of data using the bitmap.  <a href="#a864aaa190aa805c688699b5494d99e04">More...</a><br /></td></tr>
 <tr class="separator:a864aaa190aa805c688699b5494d99e04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acac451756bb3b0ac6bcb36f5027fe5dd"><td class="memItemLeft" align="right" valign="top"><a id="acac451756bb3b0ac6bcb36f5027fe5dd"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>flagUsedOffset</b> ()</td></tr>
+<tr class="memitem:acac451756bb3b0ac6bcb36f5027fe5dd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_e_p_r_o_m_class.html#acac451756bb3b0ac6bcb36f5027fe5dd">flagUsedOffset</a> ()</td></tr>
+<tr class="memdesc:acac451756bb3b0ac6bcb36f5027fe5dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag within the bitmap the appropriate bit for the current _data version at _offset.  <a href="#acac451756bb3b0ac6bcb36f5027fe5dd">More...</a><br /></td></tr>
 <tr class="separator:acac451756bb3b0ac6bcb36f5027fe5dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3c5bdec699357c116b1431276caa926"><td class="memItemLeft" align="right" valign="top"><a id="ac3c5bdec699357c116b1431276caa926"></a>
-uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>computeBitmapSize</b> (size_t size)</td></tr>
+<tr class="memitem:ac3c5bdec699357c116b1431276caa926"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_e_p_r_o_m_class.html#ac3c5bdec699357c116b1431276caa926">computeBitmapSize</a> (size_t size)</td></tr>
+<tr class="memdesc:ac3c5bdec699357c116b1431276caa926"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute size of bitmap needed for the number of copies that can be held.  <a href="#ac3c5bdec699357c116b1431276caa926">More...</a><br /></td></tr>
 <tr class="separator:ac3c5bdec699357c116b1431276caa926"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -135,9 +135,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>_dirty</b></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The ESP does not have a genuine EEPROM memory so this needs to be emulated using a segment of flash memory; this library improves upon the the standard library by avoiding excessive re-flashing of the flash memory. </p>
-<p>The library maintains a copy of your 'EEPROM' data in normal RAM which you read() and write() to. To ensure this buffered data gets saved when you power-off or reset the system you must call <a class="el" href="class_e_e_p_r_o_m_class.html#a871f11ba6f5a43c1e9ecde1ce99dbb6b" title="Write the EEPROM data to the flash memory. ">commit()</a> to write the buffer to flash memory that will survive the reset. When you call <a class="el" href="class_e_e_p_r_o_m_class.html#ab27ca4fac7c886d61b6294525b17ecf9" title="Initialise the EEPROM system, reading from flash if there appears to be suitable data already there...">begin()</a> the library will check the flash memory and read the data there into the buffer so it is available to be read() by your program.</p>
+<p>The library maintains a copy of your 'EEPROM' data in normal RAM which you <a class="el" href="class_e_e_p_r_o_m_class.html#a2e6fae68c926a984dfafab4c3f5a825d" title="Read a byte of data from an offset in the buffered EEPROM data. ">read()</a> and <a class="el" href="class_e_e_p_r_o_m_class.html#a5a4c9ed90008d133e43d30b41941214e" title="Write a byte of data to an address within the the library&#39;s EEPROM data buffer. ">write()</a> to. To ensure this buffered data gets saved when you power-off or reset the system you must call <a class="el" href="class_e_e_p_r_o_m_class.html#a871f11ba6f5a43c1e9ecde1ce99dbb6b" title="Write the EEPROM data to the flash memory. ">commit()</a> to write the buffer to flash memory that will survive the reset. When you call <a class="el" href="class_e_e_p_r_o_m_class.html#ab27ca4fac7c886d61b6294525b17ecf9" title="Initialise the EEPROM system, reading from flash if there appears to be suitable data already there...">begin()</a> the library will check the flash memory and read the data there into the buffer so it is available to be <a class="el" href="class_e_e_p_r_o_m_class.html#a2e6fae68c926a984dfafab4c3f5a825d" title="Read a byte of data from an offset in the buffered EEPROM data. ">read()</a> by your program.</p>
 <p>Including this library will create a variable call 'EEPROM' in your program which you use to access the EEPROM functions, such as EEPROM.begin(), EEPRON.read(), etc.</p>
-<h2>WHy ESP_EEPROM</h2>
+<h2>Why ESP_EEPROM</h2>
 <p>It is not possible to rewrite flash memory without first erasing it back to a known state. With the normal library, each <a class="el" href="class_e_e_p_r_o_m_class.html#a871f11ba6f5a43c1e9ecde1ce99dbb6b" title="Write the EEPROM data to the flash memory. ">commit()</a> of the data to flash requires an erase of the flash sector. With this revised library the sector in flash memory is used to hold multiple copies of the EEPROM data. Each time you <a class="el" href="class_e_e_p_r_o_m_class.html#a871f11ba6f5a43c1e9ecde1ce99dbb6b" title="Write the EEPROM data to the flash memory. ">commit()</a> data, it is written to a new area of flash until the sector is full. Only then does the library erase the sector to allow the next copy to be written.</p>
 <p>The main drawback of erasing the flash is that it is quite slow (several 10s of ms) and during all operations on flash memory the interrupts have to be halted. Stopping interrupts will disrupt an PWM (analogWrite) outputs which can produce a noticeable disturbance in any lights attached to these. Flash memory can also only accommodate a limited number of re-flashes before it fails. This library helps extend the life of the flash memory by reducing the number of times it needs to be erased.</p>
 <h2>Layout</h2>
@@ -237,6 +237,167 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>_dirty</b></td></tr>
 
 </div>
 </div>
+<a id="a4af12c26be29b81b729090d78c8247a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4af12c26be29b81b729090d78c8247a4">&#9670;&nbsp;</a></span>commitReset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool EEPROMClass::commitReset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Perform an erase of the flash sector before committing the data. </p>
+<dl class="section return"><dt>Returns</dt><dd>True is all OK; false if there was a problem. </dd></dl>
+
+</div>
+</div>
+<a id="ac3c5bdec699357c116b1431276caa926"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3c5bdec699357c116b1431276caa926">&#9670;&nbsp;</a></span>computeBitmapSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t EEPROMClass::computeBitmapSize </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute size of bitmap needed for the number of copies that can be held. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>The size of the EEPROM required </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of bytes required for the bitmap </dd></dl>
+
+</div>
+</div>
+<a id="acac451756bb3b0ac6bcb36f5027fe5dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acac451756bb3b0ac6bcb36f5027fe5dd">&#9670;&nbsp;</a></span>flagUsedOffset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int EEPROMClass::flagUsedOffset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flag within the bitmap the appropriate bit for the current _data version at _offset. </p>
+<dl class="section return"><dt>Returns</dt><dd>The byte index within _bitmap that has been changed </dd></dl>
+
+</div>
+</div>
+<a id="a1b1b67982183fa713c6fe2b68f5cf314"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b1b67982183fa713c6fe2b68f5cf314">&#9670;&nbsp;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T&amp; EEPROMClass::get </td>
+          <td>(</td>
+          <td class="paramtype">int const&#160;</td>
+          <td class="paramname"><em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Obtain EEPROM data for a variable stored at the address. </p>
+<p>The variable type will determine the size of the data read from the buffer. For example the variable can be an entire struct which allows for a convenient way to maintain and access the EEPROM data.</p>
+<p>The actual flash data is read in the <a class="el" href="class_e_e_p_r_o_m_class.html#ab27ca4fac7c886d61b6294525b17ecf9" title="Initialise the EEPROM system, reading from flash if there appears to be suitable data already there...">begin()</a> call and so this function only reads from the buffered data which makes it relatively fast.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">address</td><td>The offset of the variable with the EEPROM data </td></tr>
+    <tr><td class="paramname">v</td><td>The variable to hold the retrieved data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value of the retrieved variable </dd></dl>
+
+</div>
+</div>
+<a id="a864aaa190aa805c688699b5494d99e04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a864aaa190aa805c688699b5494d99e04">&#9670;&nbsp;</a></span>offsetFromBitmap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t EEPROMClass::offsetFromBitmap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute the offset of the current version of data using the bitmap. </p>
+<dl class="section return"><dt>Returns</dt><dd>The offset of the current version of data </dd></dl>
+
+</div>
+</div>
 <a id="ad68a1684c65c2732d9a186d4ff964c11"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad68a1684c65c2732d9a186d4ff964c11">&#9670;&nbsp;</a></span>percentUsed()</h2>
 
@@ -259,8 +420,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>_dirty</b></td></tr>
 
 </div>
 </div>
-<a id="a3a6c2a284d7a302332eadc1693aad1d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a6c2a284d7a302332eadc1693aad1d1">&#9670;&nbsp;</a></span>put()</h2>
+<a id="aa9bf1cd34ee9a67ffec7c8efe80de253"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9bf1cd34ee9a67ffec7c8efe80de253">&#9670;&nbsp;</a></span>put()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -280,7 +441,7 @@ template&lt;typename T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const T &amp;&#160;</td>
-          <td class="paramname"><em>t</em>&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -296,14 +457,46 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Write data to the EEPROM buffer. </p>
+<p>The function checks if the data is different from that already in the buffer.</p>
+<p>The data is written to the internal buffer but is only written to the flash memory in the <a class="el" href="class_e_e_p_r_o_m_class.html#a871f11ba6f5a43c1e9ecde1ce99dbb6b" title="Write the EEPROM data to the flash memory. ">commit()</a> function. The <a class="el" href="class_e_e_p_r_o_m_class.html#a871f11ba6f5a43c1e9ecde1ce99dbb6b" title="Write the EEPROM data to the flash memory. ">commit()</a> function only writes to flash if there have been changes to the buffered data (or if the buffered data has never been written to the flash previously).</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_e_e_p_r_o_m_class.html#a871f11ba6f5a43c1e9ecde1ce99dbb6b" title="Write the EEPROM data to the flash memory. ">commit()</a></dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">address</td><td>Relative address to which to write the data whithin the EEPROM buffer. </td></tr>
-    <tr><td class="paramname">t</td><td>The variable to write to the buffer </td></tr>
+    <tr><td class="paramname">address</td><td>Relative address to which to write the data within the EEPROM buffer. </td></tr>
+    <tr><td class="paramname">v</td><td>The variable to write to the buffer </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The variable written to the buffer </dd></dl>
+
+</div>
+</div>
+<a id="a2e6fae68c926a984dfafab4c3f5a825d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e6fae68c926a984dfafab4c3f5a825d">&#9670;&nbsp;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t EEPROMClass::read </td>
+          <td>(</td>
+          <td class="paramtype">int const&#160;</td>
+          <td class="paramname"><em>address</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a byte of data from an offset in the buffered EEPROM data. </p>
+<p>The data is actually read from the flash during the call to <a class="el" href="class_e_e_p_r_o_m_class.html#ab27ca4fac7c886d61b6294525b17ecf9" title="Initialise the EEPROM system, reading from flash if there appears to be suitable data already there...">begin()</a> so this call just read from that buffered copy and so is pretty fast.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_e_e_p_r_o_m_class.html#a1b1b67982183fa713c6fe2b68f5cf314" title="Obtain EEPROM data for a variable stored at the address. ">get()</a></dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">address</td><td>The offset in the data buffer to read from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The byte at the specified address. </dd></dl>
 
 </div>
 </div>
@@ -322,9 +515,47 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Force an immedate erase of the flash sector - but nothing is written. </p>
+<p>Force an immediate erase of the flash sector - but nothing is written. </p>
 <p>The internal library variables &amp; data are initialised (zeroed) but the <a class="el" href="class_e_e_p_r_o_m_class.html#a871f11ba6f5a43c1e9ecde1ce99dbb6b" title="Write the EEPROM data to the flash memory. ">commit()</a> function must be called to write structure (size and bitmap etc.) and any new data to the flash.</p>
 <dl class="section return"><dt>Returns</dt><dd>True is success; false if the erase operation failed. </dd></dl>
+
+</div>
+</div>
+<a id="a5a4c9ed90008d133e43d30b41941214e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a4c9ed90008d133e43d30b41941214e">&#9670;&nbsp;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EEPROMClass::write </td>
+          <td>(</td>
+          <td class="paramtype">int const&#160;</td>
+          <td class="paramname"><em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t const&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Write a byte of data to an address within the the library's EEPROM data buffer. </p>
+<p>This call just updates the internal data buffer. You must call <a class="el" href="class_e_e_p_r_o_m_class.html#a871f11ba6f5a43c1e9ecde1ce99dbb6b" title="Write the EEPROM data to the flash memory. ">commit()</a> to actual write your data to flash so that it can be retained between restarts.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">address</td><td>The offset with the EEPROM to which to write the data </td></tr>
+    <tr><td class="paramname">value</td><td>The byte of data to write to the address </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

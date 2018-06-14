@@ -1,5 +1,5 @@
 /*
- ESP_EEPROM.cpp - improved esp8266 EEPROM emulation
+ ESP_EEPROM.h - improved esp8266 EEPROM emulation
  
  Copyright (c) 2018 James Watson. All rights reserved.
  
@@ -99,11 +99,16 @@ public:
 		return v;
 	}
 
+	/**
+	 * Get the size of the EEPROM buffer.
+	 *
+	 * @return The size of hte buffer
+	 */
 	size_t length() {
 		return _size;
 	}
 
-protected:
+private:
 	EEPROMClass(uint32_t sector);
 
 	uint32_t _sector;

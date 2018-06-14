@@ -22,7 +22,6 @@
  */
 
 /** @class EEPROMClass
- *
  * The ESP does not have a genuine EEPROM memory so this needs to be emulated
  * using a segment of flash memory; this library improves upon the the standard
  * library by avoiding excessive re-flashing of the flash memory.
@@ -33,6 +32,7 @@
  * When you call begin() the library will check the flash memory and read the data there
  * into the buffer so it is available to be read() by your program.
  *
+ * ## Calling the library
  * Including this library will create a variable call 'EEPROM' in your program which
  * you use to access the EEPROM functions, such as EEPROM.begin(), EEPRON.read(), etc.
  *
@@ -98,8 +98,10 @@ extern "C" uint32_t _SPIFFS_end;
 
 //------------------------------------------------------------------------------
 /**
- * Create an instance of the EEPROM class at using a specified sector of flash memory;
- * this constructor is not normally used, as including the library instantiates the required EEPROM variable.
+ * Create an instance of the EEPROM class at using a specified sector of flash memory.
+ *
+ * This constructor is not normally used, as including the library instantiates the required
+ * 'EEPROM' variable.
  *
  * @param sector The flash sector to use to hold the EEPROM data
  */
@@ -110,8 +112,23 @@ EEPROMClass::EEPROMClass(uint32_t sector) :
 
 //------------------------------------------------------------------------------
 /**
- * Create an instance of the EEPROM class based on the default EEPROM flash sector;
- * this constructor is not normally used, as including the library instantiates the required EEPROM variable.
+ * Create an instance of the EEPROM class based on the default EEPROM flash sector.
+ *
+ * This constructor is not normally used, as including the library instantiates the required
+ * 'EEPROM' variable.
+ *
+ * The EEPROM variable is then used to access the functions of this library.
+ *
+ * e.g.
+ * + EEPROM.begin(50);
+ * + EEPROM.put(4, myVariable);
+ * + EEPROM.get(4, myOtherVariable);
+ * + EEPROM.commit();
+ *
+ * There should not be any reason for creating a second instance of the ESP_EEPROM class
+ * and as the library assumes there is only one instance and only one EEPROM sector
+ * results may be 'unpredictable'.
+ *
  */
 EEPROMClass::EEPROMClass(void) :
 		_sector((((uint32_t) & _SPIFFS_end - 0x40200000) / SPI_FLASH_SEC_SIZE)), _data(
@@ -310,11 +327,14 @@ bool EEPROMClass::commitReset() {
 
 //------------------------------------------------------------------------------
 /**
- * Write the EEPROM data to the flash memory
+ * Write the EEPROM data to the flash memory.
  *
  * The flash segment for EEPROM data is erased if necessary before performing the write.
+ * The library maintains a record of whether the buffer has been changed and the write
+ * to flash is only performed if the flash does not yet have a copy of the data or
+ * if the data in the buffer has change from what is stored in the flash memory.
  *
- * @return True if successful; false if no write was successfully performed
+ * @return True if successful; false if the write was unsuccessful.
  */
 bool EEPROMClass::commit() {
 	// everything has to be in place to even try a commit

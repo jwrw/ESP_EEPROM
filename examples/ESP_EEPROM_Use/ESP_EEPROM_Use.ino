@@ -52,7 +52,7 @@ void setup() {
 
   // Check if the EEPROM contains valid data from another run
   // If so, overwrite the 'default' values set up in our struct
-  if(EEPROM.percentUsed()!=0) {
+  if(EEPROM.percentUsed()>=0) {
     EEPROM.get(0, eepromVar1);
     eepromVar1.anInteger++;     // make a change to our copy of the EEPROM data
     Serial.println("EEPROM has data from a previous run.");

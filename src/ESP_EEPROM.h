@@ -93,7 +93,7 @@ public:
 					|| memcmp(_data + address, (const uint8_t*) &v, sizeof(T))
 							!= 0) {
 				_dirty = true;
-				memcpy(_data + address, (const uint8_t*) &t, sizeof(T));
+				memcpy(_data + address, (const uint8_t*) &v, sizeof(T));
 			}
 		}
 		return v;
@@ -114,8 +114,8 @@ private:
 	uint32_t _sector;
 	uint8_t* _data;
 	uint32_t _size;
-	uint8_t* _bitmap;
 	uint16_t _bitmapSize;
+	uint8_t* _bitmap;
 	uint16_t _offset;
 	bool _dirty;
 

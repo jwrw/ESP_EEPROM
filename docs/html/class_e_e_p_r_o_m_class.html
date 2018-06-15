@@ -95,7 +95,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <div class="textblock"><p>The ESP does not have a genuine EEPROM memory so this needs to be emulated using a segment of flash memory; this library improves upon the the standard library by avoiding excessive re-flashing of the flash memory. </p>
 <p>The library maintains a copy of your 'EEPROM' data in normal RAM which you <a class="el" href="class_e_e_p_r_o_m_class.html#a2e6fae68c926a984dfafab4c3f5a825d" title="Read a byte of data from an offset in the buffered EEPROM data. ">read()</a> and <a class="el" href="class_e_e_p_r_o_m_class.html#a5a4c9ed90008d133e43d30b41941214e" title="Write a byte of data to an address within the the library&#39;s EEPROM data buffer. ">write()</a> to. To ensure this buffered data gets saved when you power-off or reset the system you must call <a class="el" href="class_e_e_p_r_o_m_class.html#a871f11ba6f5a43c1e9ecde1ce99dbb6b" title="Write the EEPROM data to the flash memory. ">commit()</a> to write the buffer to flash memory that will survive the reset. When you call <a class="el" href="class_e_e_p_r_o_m_class.html#ab27ca4fac7c886d61b6294525b17ecf9" title="Initialise the EEPROM system, reading from flash if there appears to be suitable data already there...">begin()</a> the library will check the flash memory and read the data there into the buffer so it is available to be <a class="el" href="class_e_e_p_r_o_m_class.html#a2e6fae68c926a984dfafab4c3f5a825d" title="Read a byte of data from an offset in the buffered EEPROM data. ">read()</a> by your program.</p>
 <h2>Calling the library</h2>
-<p>Including this library will create a variable call 'EEPROM' in your program which you use to access the EEPROM functions, such as EEPROM.begin(), EEPRON.read(), etc.</p>
+<p>Including this library will create a variable call 'EEPROM' in your program which you use to access the EEPROM functions, such as EEPROM.begin(), EEPROM.read(), etc.</p>
 <h2>Why ESP_EEPROM</h2>
 <p>It is not possible to rewrite flash memory without first erasing it back to a known state. With the normal library, each <a class="el" href="class_e_e_p_r_o_m_class.html#a871f11ba6f5a43c1e9ecde1ce99dbb6b" title="Write the EEPROM data to the flash memory. ">commit()</a> of the data to flash requires an erase of the flash sector. With this revised library the sector in flash memory is used to hold multiple copies of the EEPROM data. Each time you <a class="el" href="class_e_e_p_r_o_m_class.html#a871f11ba6f5a43c1e9ecde1ce99dbb6b" title="Write the EEPROM data to the flash memory. ">commit()</a> data, it is written to a new area of flash until the sector is full. Only then does the library erase the sector to allow the next copy to be written.</p>
 <p>The main drawback of erasing the flash is that it is quite slow (several 10s of ms) and during all operations on flash memory the interrupts have to be halted. Stopping interrupts will disrupt an PWM (analogWrite) outputs which can produce a noticeable disturbance in any lights attached to these. Flash memory can also only accommodate a limited number of re-flashes before it fails. This library helps extend the life of the flash memory by reducing the number of times it needs to be erased.</p>
@@ -186,7 +186,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div><div class="memdoc">
 
 <p>Write the EEPROM data to the flash memory. </p>
-<p>The flash segment for EEPROM data is erased if necessary before performing the write. The library maintains a record of whether the buffer has been changed and the write to flash is only performed if the flash does not yet have a copy of the data or if the data in the buffer has change from what is stored in the flash memory.</p>
+<p>The flash segment for EEPROM data is erased if necessary before performing the write. The library maintains a record of whether the buffer has been changed and the write to flash is only performed if the flash does not yet have a copy of the data or if the data in the buffer has changed from what is stored in the flash memory.</p>
 <dl class="section return"><dt>Returns</dt><dd>True if successful; false if the write was unsuccessful. </dd></dl>
 
 </div>
@@ -451,8 +451,8 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Volumes/jim/Developer/Arduino/Sketches/libraries/ESP_EEPROM/src/<a class="el" href="_e_s_p___e_e_p_r_o_m_8h_source.html">ESP_EEPROM.h</a></li>
-<li>/Volumes/jim/Developer/Arduino/Sketches/libraries/ESP_EEPROM/src/ESP_EEPROM.cpp</li>
+<li>/Users/jim/Developer/Arduino/Sketches/libraries/ESP_EEPROM/src/<a class="el" href="_e_s_p___e_e_p_r_o_m_8h_source.html">ESP_EEPROM.h</a></li>
+<li>/Users/jim/Developer/Arduino/Sketches/libraries/ESP_EEPROM/src/ESP_EEPROM.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -338,8 +338,11 @@ bool EEPROMClass::commitReset() {
  */
 bool EEPROMClass::commit() {
 	// everything has to be in place to even try a commit
-	if (!_size || !_dirty || !_data || !_bitmap || _bitmapSize == 0) {
+	if (!_size || !_data || !_bitmap || _bitmapSize == 0) {
 		return false;
+	}
+	if (!_dirty) {
+		return true;
 	}
 
 	SpiFlashOpResult flashOk = SPI_FLASH_RESULT_OK;

@@ -94,7 +94,7 @@ extern "C" {
 #include "spi_flash.h"
 }
 
-extern "C" uint32_t _SPIFFS_end;
+extern "C" uint32_t _FS_end;
 
 //------------------------------------------------------------------------------
 /**
@@ -131,7 +131,7 @@ EEPROMClass::EEPROMClass(uint32_t sector) :
  *
  */
 EEPROMClass::EEPROMClass(void) :
-		_sector((((uint32_t) & _SPIFFS_end - 0x40200000) / SPI_FLASH_SEC_SIZE)), _data(
+		_sector((((uint32_t) & _FS_end - 0x40200000) / SPI_FLASH_SEC_SIZE)), _data(
 				0), _size(0), _bitmapSize(0), _bitmap(0), _offset(0), _dirty(
 				false) {
 }
@@ -338,8 +338,11 @@ bool EEPROMClass::commitReset() {
  */
 bool EEPROMClass::commit() {
 	// everything has to be in place to even try a commit
-	if (!_size || !_dirty || !_data || !_bitmap || _bitmapSize == 0) {
+	if (!_size || !_data || !_bitmap || _bitmapSize == 0) {
 		return false;
+	}
+	if (!_dirty) {
+		return true;
 	}
 
 	SpiFlashOpResult flashOk = SPI_FLASH_RESULT_OK;

@@ -334,7 +334,7 @@ bool EEPROMClass::commitReset() {
  * to flash is only performed if the flash does not yet have a copy of the data or
  * if the data in the buffer has changed from what is stored in the flash memory.
  *
- * @return True if successful; false if the write was unsuccessful.
+ * @return True if successful (or if no write was needed); false if the write was unsuccessful.
  */
 bool EEPROMClass::commit() {
 	// everything has to be in place to even try a commit

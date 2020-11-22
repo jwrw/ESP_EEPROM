@@ -187,7 +187,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 <p>Write the EEPROM data to the flash memory. </p>
 <p>The flash segment for EEPROM data is erased if necessary before performing the write. The library maintains a record of whether the buffer has been changed and the write to flash is only performed if the flash does not yet have a copy of the data or if the data in the buffer has changed from what is stored in the flash memory.</p>
-<dl class="section return"><dt>Returns</dt><dd>True if successful; false if the write was unsuccessful. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if successful (or if no write was needed); false if the write was unsuccessful. </dd></dl>
 
 </div>
 </div>

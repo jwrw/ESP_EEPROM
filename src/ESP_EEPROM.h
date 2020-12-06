@@ -36,7 +36,8 @@ class EEPROMClass {
 public:
 
 	EEPROMClass(void);
-
+	EEPROMClass(uint32_t sector);
+	
 	void begin(size_t size);
 	uint8_t read(int const address);
 	void write(int const address, uint8_t const val);
@@ -109,8 +110,6 @@ public:
 	}
 
 private:
-	EEPROMClass(uint32_t sector);
-
 	uint32_t _sector;
 	uint8_t* _data;
 	uint32_t _size;

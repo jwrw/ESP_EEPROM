@@ -16,6 +16,8 @@ doSomething	KEYWORD2
 begin	KEYWORD2
 read	KEYWORD2
 write	KEYWORD2
+put	KEYWORD2
+get	KEYWORD2
 commit	KEYWORD2
 commitReset	KEYWORD2
 wipe	KEYWORD2

@@ -85,6 +85,7 @@
 
 #include "Arduino.h"
 #include "ESP_EEPROM.h"
+#include "flash_hal.h"
 
 extern "C" {
 #include "c_types.h"
@@ -131,7 +132,7 @@ EEPROMClass::EEPROMClass(uint32_t sector) :
  *
  */
 EEPROMClass::EEPROMClass(void) :
-		_sector((((uint32_t) & _FS_end - 0x40200000) / SPI_FLASH_SEC_SIZE)), _data(
+		_sector(((EEPROM_start - 0x40200000) / SPI_FLASH_SEC_SIZE)), _data(
 				0), _size(0), _bitmapSize(0), _bitmap(0), _offset(0), _dirty(
 				false) {
 }

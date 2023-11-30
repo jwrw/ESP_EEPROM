@@ -9,4 +9,4 @@ See
 https://github.com/arduino/Arduino/wiki/Library-Manager-FAQ
 for details on creating and updating a library to be made available via the Arduino Library Manager.
 
-> Note: requires esp8266 core 3.1+ (latest is 3.1.2 at time of this release)
+> Note: Recommended to use esp8266 core 3.1+ (latest is 3.1.2 at time of this release) but library may still work with older versions on many boards

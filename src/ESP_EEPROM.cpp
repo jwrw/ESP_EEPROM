@@ -130,8 +130,13 @@ EEPROMClass::EEPROMClass(uint32_t sector) :
  * and as the library assumes there is only one instance and only one EEPROM sector
  * results may be 'unpredictable'.
  *
+ * esp8266 core 3.1+ defined EEPROM_start which is a more robust definition than the older _FS_end
+ * There is a fallback for old code
  */
 EEPROMClass::EEPROMClass(void) :
+#ifndef EEPROM_start
+	#define EEPROM_start _FS_end
+#endif
 		_sector(((EEPROM_start - 0x40200000) / SPI_FLASH_SEC_SIZE)), _data(
 				0), _size(0), _bitmapSize(0), _bitmap(0), _offset(0), _dirty(
 				false) {
